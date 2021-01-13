@@ -7,6 +7,7 @@ const user=mongoose.model('User',{
     lastName:{
         type:String
     },
+
     dob:{
         type:String 
      },
