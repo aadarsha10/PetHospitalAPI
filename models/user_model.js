@@ -14,11 +14,13 @@ const user=mongoose.model('User',{
     userName:{
         type:String,
     },
+    email:{
+        type:String
+    },
     password:{
         type:String
     }
     
-
 })
 
 module.exports=user

@@ -7,9 +7,10 @@ router.post('/registerUser',function(req,res){
     const lastName=req.body.lastName
     const dob=req.body.dob
     const userName=req.body.userName   //body.userName vaneko form bata aauni aile chei postman ko
+    const email=req.body.email
     const password=req.body.password
 
-    const u1=new user({firstName:firstName,lastName:lastName,dob:dob,userName:userName,password:password}) //first ko userName vnya database ko second ko chei mathi variable
+    const u1=new user({firstName:firstName,lastName:lastName,dob:dob,userName:userName,email:email,password:password}) //first ko userName vnya database ko second ko chei mathi variable
     u1.save()
 })
 
@@ -28,4 +29,4 @@ router.put('/updateUser/:id',function(req,res){
     })
 })
 
-module.exports=router
+module.exports=router   
