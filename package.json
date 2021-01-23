@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/softwarica-github/t2---backend-api-Rojan904#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
+    "express-validator": "^6.9.2",
     "mongoose": "^5.11.11"
   }
 }
