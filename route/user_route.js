@@ -3,7 +3,7 @@ const router=express.Router()
 const user=require('../models/user_model')
 const {check,validationResult}=require('express-validator') //for validation npm i express-validator --save
 const bcryptjs=require('bcryptjs')   //for encryption, done after validation
-
+const jwt=require('jsonwebtoken')   //for token npm i jsonwebtoken --save
 // var validator = require("email-validator");
 // validator.validate("test@email.com");
 
@@ -27,15 +27,48 @@ router.post('/registerUser',[
     bcryptjs.hash(password,10,function(err,hash){   //hash varifies that a file/data hasnot altered.
         const u1=new user({firstName:firstName,lastName:lastName,dob:dob,userName:userName,email:email,password:hash}) //first ko userName vnya database ko second ko chei mathi variable
         u1.save()
+        .then(function(result){ 
+            res.status(201).json({message:"Registered!"})    //showing message in postman/client
+        })
+        .catch(function(err){
+            res.status(500).json({message:err})
+        })
     })
    
     }
     else{
-        res.send(errors.array())   //if there is error send errors
+        res.status(400).json(errors.array())   //if there is error send errors
     }
    
 })
 
+//login system
+router.get('/user/login',function(req,res){
+    const userName=req.body.userName
+    const password=req.body.password   //user provided password
+    //we need to find if user exists
+    user.findOne({userName:userName})    //first ko userName user_model bata aako sec ko variable
+    .then(function(userData){
+        if(userData===null){
+            return res.status(403).json({message : "Invalid username or password!"})
+        }
+        //username is correct
+        bcryptjs.compare(password,userData.password,function(err,result){ //first password is variable and another is db password
+            if(result===false){
+                return res.status(403).json({message : "Invalid username or password!"})
+            }
+            // res.send("Correct")
+            const token=jwt.sign({userId:userData._id},'secretkey')  //providing token
+            res.status(200).json({
+                message:"Authorization success",
+                token:token
+            })
+            
+
+        })
+    })
+    .catch()  
+})
 router.delete('/deleteUser/:id',function(req,res){
     const id=req.params.id    //params.id vnya url bata aauni, same to upper
     user.deleteOne({_id:id}).then(function(){
