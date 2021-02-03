@@ -1,19 +1,10 @@
 const mongoose=require('mongoose')
 
-const user=mongoose.model('User',{
-    firstName:{
+const admin=mongoose.model('Admin',{
+    name:{
         type:String,
         required:true 
     },
-    lastName:{
-        type:String,
-        required:true,
-      
-    },
-    dob:{
-        type:Date,
-        required:true 
-     },
     userName:{
         type:String,
         unique:true,
@@ -36,4 +27,4 @@ const user=mongoose.model('User',{
     
 })
 
-module.exports=user
+module.exports=admin
