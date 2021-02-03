@@ -50,10 +50,10 @@ module.exports.checkPet=function(req,res,next){
         
         const token=req.headers.authorization.split(" ")[1];
         const verifiedData=jwt.verify(token,'secretkey');
-        console.log(verifiedData.userId)
-        pet.findOne({_id:verifiedData.userId})
-        .then(function(userData){
-            res.send(userData);
+        console.log(verifiedData.petId)
+        pet.findOne({_id:verifiedData.petId})
+        .then(function(petData){
+            res.send(petData);
             next();
         })
         .catch(function(e){
