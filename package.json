@@ -1,21 +1,21 @@
 {
-  "name": "aila",
+  "name": "pet_hosp",
   "version": "1.0.0",
-  "description": "this is liquor delivery app",
+  "description": "API for Pet hospital application",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/softwarica-github/t2---backend-api-Rojan904.git"
+    "url": "git+https://github.com/softwarica-github/t2---backend-api-aadarsha10.git"
   },
-  "author": "Rojan Shrestha",
+  "author": "Aadarsha Man Shrestha",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/softwarica-github/t2---backend-api-Rojan904/issues"
+    "url": "https://github.com/softwarica-github/t2---backend-api-aadarsha10/issues"
   },
-  "homepage": "https://github.com/softwarica-github/t2---backend-api-Rojan904#readme",
+  "homepage": "https://github.com/softwarica-github/t2---backend-api-aadarsha10#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",

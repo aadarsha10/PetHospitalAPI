@@ -19,6 +19,10 @@ const pet=mongoose.model('Pet',{
         type:String,
         unique:true,
         required:true 
+    },
+    productImage:{
+        type:String,
+        required:true
     }
     
 })
