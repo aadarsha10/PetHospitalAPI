@@ -10,19 +10,17 @@ const pet=mongoose.model('Pet',{
         required:true 
      },
     petType:{
-        type:String
+        type:String,
+        required:true
     },
     petBreed:{
         type:String  
     },
     petMedicalHistory:{
-        type:String,
-        unique:true,
-        required:true 
+        type:String
     },
-    productImage:{
-        type:String,
-        required:true
+    petImage:{
+        type:String
     }
     
 })

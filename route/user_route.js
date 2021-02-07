@@ -4,8 +4,6 @@ const user=require('../models/user_model')
 const {check,validationResult}=require('express-validator') //for validation npm i express-validator --save
 const bcryptjs=require('bcryptjs')   //for encryption, done after validation
 const jwt=require('jsonwebtoken')   //for token npm i jsonwebtoken --save
-// var validator = require("email-validator");
-// validator.validate("test@email.com");
 
 const auth = require('../middleware/authenticate') //authenticate page routing 
 
@@ -45,7 +43,7 @@ router.post('/registerUser',[
 })
 
 //login system
-router.get('/user/login', auth.checkUser, auth.verifyAdmin,function(req,res){
+router.post('/user/login',function(req,res){
     const userName=req.body.userName
     const password=req.body.password   //user provided password
     //we need to find if user exists
@@ -77,6 +75,10 @@ router.delete('/deleteUser/:id',function(req,res){
     const id=req.params.id    //params.id vnya url bata aauni, same to upper
     user.deleteOne({_id:id}).then(function(){
         console.log("deleted")
+        res.status(200).json({message : "Deleted!", status:"True"})
+    })
+    .catch(function(e){
+        res.status(500).json({message : e, status:"False"})
     })
 })
 
@@ -85,6 +87,10 @@ router.put('/updateUser/:id',function(req,res){
     const uName=req.body.userName
     user.updateOne({_id:uid,userName:uName}).then(function(){
         console.log("updated")
+        res.status(200).json({message : "Updated!", status:"True"})
+    })
+    .catch(function(e){
+        res.status(500).json({message : e, status:"False"})
     })
 })
 

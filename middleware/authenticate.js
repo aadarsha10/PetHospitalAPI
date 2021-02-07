@@ -10,13 +10,12 @@ module.exports.checkUser=function(req,res,next){
         console.log(verifiedData.userId)
         user.findOne({_id:verifiedData.userId})
         .then(function(userData){
-            res.send(userData);
+            req.userData = userData
             next();
         })
         .catch(function(e){
             res.status(401).json({error: e});
         })
-
 
     }
     catch(er){
@@ -26,6 +25,7 @@ module.exports.checkUser=function(req,res,next){
        
 }
 
+//steps of authentication to follow
 //1. token fetch from client(ticket)
 //2. need to verify if the token is valid or not    
 //3. false: return with error message.
@@ -41,7 +41,6 @@ module.exports.verifyAdmin = function(req,res,next){
         return res.status(401).json({message: "Authorized!"})
     }
 }
-
 
 
 // for pet data authentication 
