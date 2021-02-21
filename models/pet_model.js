@@ -20,7 +20,8 @@ const pet=mongoose.model('Pet',{
         type:String
     },
     petImage:{
-        type:String
+        type:String,
+        default: "no-photo.jpg"
     }
     
 })
