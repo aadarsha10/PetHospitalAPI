@@ -23,7 +23,7 @@ const pet=mongoose.model('Pet',{
         type:String,
         default: "no-photo.jpg"
     }
-    ``
+    
 })
 
 module.exports=pet
