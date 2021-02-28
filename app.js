@@ -14,24 +14,24 @@ app.use(petRoute)
 app.use(cors())
 
 //start to listen to requests from port 90
-// app.listen(90)
-app.use(errorHandler);
+app.listen(90)
+// app.use(errorHandler);
 
-const PORT = process.env.PORT || 90;
+// const PORT = process.env.PORT || 90;
 
-// In order to run the server we need to call listen
-const server = app.listen(
-    PORT,
-    console.log(
-      `Server running in mode : ${process.env.NODE_ENV},on port : ${PORT}`.yellow
-        .bold
-    )
-  );
+// // In order to run the server we need to call listen
+// const server = app.listen(
+//     PORT,
+//     console.log(
+//       `Server running in mode : ${process.env.NODE_ENV},on port : ${PORT}`.yellow
+//         .bold
+//     )
+//   );
 
-  //Handle unhandled promise rejections , change the password in the env file and check and throw error message.
-process.on("unhandledRejection", (err, promise) => {
-    console.log(`Error connecting database : ${err.message}`.red);
-    //close server and exit process
-    server.close(() => process.exit(1));
-  });
+//   //Handle unhandled promise rejections , change the password in the env file and check and throw error message.
+// process.on("unhandledRejection", (err, promise) => {
+//     console.log(`Error connecting database : ${err.message}`.red);
+//     //close server and exit process
+//     server.close(() => process.exit(1));
+//   });
   

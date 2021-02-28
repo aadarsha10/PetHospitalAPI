@@ -43,27 +43,27 @@ module.exports.verifyAdmin = function(req,res,next){
 }
 
 
-// for pet data authentication 
-module.exports.checkPet=function(req,res,next){
-    try{
+// // for pet data authentication 
+// module.exports.checkPet=function(req,res,next){
+//     try{
         
-        const token=req.headers.authorization.split(" ")[1];
-        const verifiedData=jwt.verify(token,'secretkey');
-        console.log(verifiedData.petId)
-        pet.findOne({_id:verifiedData.petId})
-        .then(function(petData){
-            res.send(petData);
-            next();
-        })
-        .catch(function(e){
-            res.status(401).json({error: e});
-        })
+//         const token=req.headers.authorization.split(" ")[1];
+//         const verifiedData=jwt.verify(token,'secretkey');
+//         console.log(verifiedData.petId)
+//         pet.findOne({_id:verifiedData.petId})
+//         .then(function(petData){
+//             res.send(petData);
+//             next();
+//         })
+//         .catch(function(e){
+//             res.status(401).json({error: e});
+//         })
 
 
-    }
-    catch(er){
-        res.status(401).json({error:er})
+//     }
+//     catch(er){
+//         res.status(401).json({error:er})
 
-    }
+//     }
        
-}
+// }

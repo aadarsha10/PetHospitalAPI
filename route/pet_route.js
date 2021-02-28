@@ -27,7 +27,7 @@ router.post('/pet/insert',upload.single('petImage'),function(req,file, res){
         petMedicalHistory:petMedicalHistory,
         petImage:req.file.path})//params for pet data insertion into database
     
-        petData.save().then(function(result){
+        petData.save().then(function(){
         res.status(201).json({message:"Pet Registered Successfully."})
     })
     .catch(function(e){
@@ -39,8 +39,8 @@ router.post('/pet/insert',upload.single('petImage'),function(req,file, res){
 router.delete('/pet/delete/:petId',function(req,res){
     const pet_id=req.params.petId
     pet.deleteOne({_id:pet_id})
-    .then(function(result){
-        res.status(200).json({message:"Product deleted successfully",status:"true"})
+    .then(function(){
+        res.status(200).json({message:"Pet details deleted successfully",success:true})
     })
     .catch(function(err){
         res.status(500).json({message:err,status:"false"})
@@ -58,12 +58,12 @@ router.put('/pet/updatePet/:petId',auth.checkUser, function(req,res){
     
     
     pet.updateOne({_id:pid},{petName:pName, petAge:pAge, petBreed:pBreed, petMedicalHistory:pMedicalHistory, petImage:pImage})
-    .then(function(result){
+    .then(function(){
         console.log("updated")
-        res.status(200).json({message : "Updated!", status:"True"})
+        res.status(200).json({message : "Updated!", success:true})
     })
     .catch(function(e){
-        res.status(500).json({message : e, status:"False"})
+        res.status(500).json({message : e, success:false})
     })
 })
 
@@ -79,13 +79,13 @@ router.get('/pet/all', function(req,res){
 })
 
 //Read 
-router.get('/pet/single/:petId',auth.checkUser, function(req,res){
-     const id = req.params.petId   
-    pet.findOne({_id : id}).then(function(data){
-        res.status(200).json(data)
+router.get('/pet/single/:userId',auth.checkUser,auth.verifyAdmin, function(req,res){
+     const uid = req.params.userID   
+    pet.findOne({_id : uid}).then(function(data){
+        res.status(200).json({success:true, data})
     })
     .catch(function(e){
-        res.status(500).json({message : e})
+        res.status(500).json({success:true, message : e})
     })
 })
 

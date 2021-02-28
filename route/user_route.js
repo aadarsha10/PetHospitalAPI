@@ -7,8 +7,8 @@ const jwt=require('jsonwebtoken')   //for token npm i jsonwebtoken --save
 
 const auth = require('../middleware/authenticate') //authenticate page routing 
 
-router.post('/registerUser',[
-    check('firstName',"First name is required!").not().isEmpty(),  //empty checking
+router.post('/register',[
+    check('username',"Username is required!").not().isEmpty(),  //empty checking
     check('email',"Invalid Email Address!").isEmail(),     //email check
     check('password',"Password is required!").not().isEmpty(),
 
@@ -17,21 +17,21 @@ router.post('/registerUser',[
     
 
     if(errors.isEmpty()){        //if there is no error
-    const firstName=req.body.firstName
-    const lastName=req.body.lastName
-    const dob=req.body.dob
-    const userName=req.body.userName   //body.userName vaneko form bata aauni aile chei postman ko
+    const firstName=req.body.fname
+    const lastName=req.body.lname
+    const userName=req.body.username 
     const email=req.body.email
     const password=req.body.password
 
     bcryptjs.hash(password,10,function(err,hash){   //hash varifies that a file/data hasnot altered.
-        const u1=new user({firstName:firstName,lastName:lastName,dob:dob,userName:userName,email:email,password:hash}) //first ko userName vnya database ko second ko chei mathi variable
+        const u1=new user({firstName:firstName,lastName:lastName,userName:userName,email:email,password:hash}) //first ko userName vnya database ko second ko chei mathi variable
+        console.log(u1)
         u1.save()
-        .then(function(result){ 
-            res.status(201).json({message:"Registered!"})    //showing message in postman/client
+        .then(function(){ 
+            res.status(201).json({success: true, message:"Registered!"})    //showing message in postman/client
         })
-        .catch(function(err){
-            res.status(500).json({message:err})
+        .catch(function(){
+            res.status(500).json({success: false, message:err})
         })
     })
    
@@ -43,25 +43,26 @@ router.post('/registerUser',[
 })
 
 //login system
-router.post('/user/login',function(req,res){
-    const userName=req.body.userName
+router.post('/login',function(req,res){
+    const userName=req.body.username
     const password=req.body.password   //user provided password
     //we need to find if user exists
     user.findOne({userName:userName})    //first variable userName is from user_model while the second is created here
     .then(function(userData){
         if(userData===null){
-            return res.status(403).json({message : "Invalid username or password!"})
+            return res.status(403).json({success: false, userData:null})
         }
         //username is correct
         bcryptjs.compare(password,userData.password,function(err,result){ //first password is variable and another is db password
             if(result===false){
-                return res.status(403).json({message : "Invalid username or password!"})
+                return res.status(403).json({success:false, message : "Invalid username or password!"})
             }
             // res.send("Correct")
             const token=jwt.sign({userId:userData._id},'secretkey')  //providing token
             res.status(200).json({
-                message:"Authorization success",
-                token:token
+                success:true,
+                token:token,
+                userData:userData
             })
             
 

@@ -10,10 +10,6 @@ const user=mongoose.model('User',{
         required:true,
       
     },
-    dob:{
-        type:Date,
-        required:true 
-     },
     userName:{
         type:String,
         unique:true,
@@ -24,8 +20,7 @@ const user=mongoose.model('User',{
         type:String,
         unique:true,
         required:true,
-        lowercase:true,
-        uppercase:true
+        lowercase:true
         
     },
     password:{
