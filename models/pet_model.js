@@ -22,7 +22,6 @@ const pet=mongoose.model('Pet',{
     petMedicalHistory:{
         type:String
     },
-
     userName:{
         type: String
     }

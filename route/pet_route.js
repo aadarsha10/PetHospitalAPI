@@ -8,7 +8,7 @@ const upload = require('../middleware/image_upload') //routing to upload.js
 
 //for inserting Pet details
 
-router.post('/pet/insert',function(req,file, res){
+router.post('/pet/insert',function(req, res){
     
     console.log(req.file)//to fetch file info 
 
@@ -31,7 +31,7 @@ router.post('/pet/insert',function(req,file, res){
         })//params for pet data insertion into database
     
         petData.save().then(function(){
-        res.status(201).json({success:true,message:"Pet Registered Successfully."})
+        res.status(201).json({message:"Pet Registered Successfully."})
     })
     .catch(function(e){
         res.status(500).json({message:e})
@@ -63,10 +63,10 @@ router.put('/pet/updatePet/:petId',auth.checkUser, function(req,res){
     pet.updateOne({_id:pid},{petName:pName, petAge:pAge, petBreed:pBreed, petMedicalHistory:pMedicalHistory, petImage:pImage})
     .then(function(){
         console.log("updated")
-        res.status(200).json({message : "Updated!", success:true})
+        res.status(200).json({message : "Updated!"})
     })
     .catch(function(e){
-        res.status(500).json({message : e, success:false})
+        res.status(500).json({message : e})
     })
 })
 
@@ -80,7 +80,7 @@ router.post('/pets/user', function(req,res){
         res.status(200).json({message:"data fetched", petData: data})
     })
     .catch(function(e){ 
-        res.status(500).json({success:true, message : e})
+        res.status(500).json({ message : e})
     })
 })
 
