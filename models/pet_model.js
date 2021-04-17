@@ -16,6 +16,9 @@ const pet=mongoose.model('Pet',{
     petBreed:{
         type:String  
     },
+    petGender:{
+        type:String
+    },
     petMedicalHistory:{
         type:String
     },
@@ -29,4 +32,4 @@ const pet=mongoose.model('Pet',{
     
 })
 
-module.exports=pet
+module.exports=pet  

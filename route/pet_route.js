@@ -18,6 +18,7 @@ router.post('/pet/insert',upload.single('petImage'),function(req,file, res){
     const petType=req.body.petType
     const petBreed=req.body.petBreed
     const petMedicalHistory=req.body.petMedicalHistory
+    const userId=req.body.userID
 
     const petData=new pet({
         petName:petName,
@@ -25,10 +26,11 @@ router.post('/pet/insert',upload.single('petImage'),function(req,file, res){
         petType:petType,
         petBreed:petBreed,
         petMedicalHistory:petMedicalHistory,
+        userId:userId,
         petImage:req.file.path})//params for pet data insertion into database
     
         petData.save().then(function(){
-        res.status(201).json({message:"Pet Registered Successfully."})
+        res.status(201).json({success:true,message:"Pet Registered Successfully."})
     })
     .catch(function(e){
         res.status(500).json({message:e})
@@ -68,23 +70,15 @@ router.put('/pet/updatePet/:petId',auth.checkUser, function(req,res){
 })
 
 //Read all
-router.get('/pet/all', function(req,res){
-        
-    pet.find().then(function(data){
-        res.status(200).json(data)
-    })
-    .catch(function(e){
-        res.status(500).json({message : e})
-    })
-})
+  
 
 //Read 
-router.get('/pet/single/:userId',auth.checkUser,auth.verifyAdmin, function(req,res){
-     const uid = req.params.userID   
-    pet.findOne({_id : uid}).then(function(data){
-        res.status(200).json({success:true, data})
+router.post('/pets/user', function(req,res){
+     const uname = req.body.username   
+    pet.findOne({userName : uname}).then(function(data){
+        res.status(200).json({message:"data fetched", petData: data})
     })
-    .catch(function(e){
+    .catch(function(e){ 
         res.status(500).json({success:true, message : e})
     })
 })
