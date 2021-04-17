@@ -8,26 +8,27 @@ const upload = require('../middleware/image_upload') //routing to upload.js
 
 //for inserting Pet details
 
-router.post('/pet/insert',upload.single('petImage'),function(req,file, res){
+router.post('/pet/insert',function(req,file, res){
     
     console.log(req.file)//to fetch file info 
 
-    
-    const petName=req.body.petName
-    const petAge=req.body.petAge
-    const petType=req.body.petType
-    const petBreed=req.body.petBreed
-    const petMedicalHistory=req.body.petMedicalHistory
-    const userId=req.body.userID
+    const petName=req.body.pname
+    const petAge=req.body.age
+    const petType=req.body.type
+    const petBreed=req.body.breed
+    const petGender = req.body.gender
+    const petMedicalHistory=req.body.existingHealthCondition
+    const userName=req.body.relatedUserName
 
     const petData=new pet({
         petName:petName,
         petAge:petAge,
         petType:petType,
         petBreed:petBreed,
+        petGender : petGender,
         petMedicalHistory:petMedicalHistory,
-        userId:userId,
-        petImage:req.file.path})//params for pet data insertion into database
+        userName:userName,
+        })//params for pet data insertion into database
     
         petData.save().then(function(){
         res.status(201).json({success:true,message:"Pet Registered Successfully."})

@@ -22,10 +22,7 @@ const pet=mongoose.model('Pet',{
     petMedicalHistory:{
         type:String
     },
-    petImage:{
-        type:String,
-        default: "no-photo.jpg"
-    },
+
     userName:{
         type: String
     }
