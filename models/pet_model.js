@@ -26,7 +26,7 @@ const pet=mongoose.model('Pet',{
         type:String,
         default: "no-photo.jpg"
     },
-    userID:{
+    userName:{
         type: String
     }
     
