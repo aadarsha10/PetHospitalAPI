@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 
 const booking=mongoose.model('Booking',{
-    pname:{
+    petname:{
         type:String,
         required:true 
     },
@@ -10,9 +10,12 @@ const booking=mongoose.model('Booking',{
         required:true
         
     },
-    pcondition:{
+    petcondition:{
         type:String,
         
+    },
+    phone:{
+        type:String
     },
     date:{
         type:String,
