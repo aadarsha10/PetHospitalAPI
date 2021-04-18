@@ -62,7 +62,11 @@ router.post('/login',function(req,res){
             res.status(200).json({
                 success:true,
                 token:token,
-                userData:userData
+                Username:userData.userName,
+                Email:userData.email,
+                Lastname:userData.lastName,
+                Firstname:userData.firstName
+
             })
             
 

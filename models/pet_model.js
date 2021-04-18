@@ -6,7 +6,7 @@ const pet=mongoose.model('Pet',{
         required:true 
     },
     petAge:{
-        type:Number,
+        type:String,
         required:true 
      },
     petType:{
@@ -23,7 +23,8 @@ const pet=mongoose.model('Pet',{
         type:String
     },
     userName:{
-        type: String
+        type: String,
+        required:true
     }
     
 })
