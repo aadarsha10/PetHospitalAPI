@@ -43,10 +43,10 @@ router.post('/booking/update/user', function(req,res){
     const reason=req.body.reason
     const usrUsername=req.body.usrUserName 
     console.log(uname) 
-    booking.updateOne({userName: usrUsername},{petName:petname, petAge:petcondition, petBreed:phone, 
-        petMedicalHistory:date, petGender : time, petType : reason})
+    booking.updateOne({userName: usrUsername},{petname:petname, petcondition:petcondition, phone:phone, 
+        date:date, time : time, reason : reason})
     .then(function(){
-        console.log("updated")
+        console.log("updated booking")
         res.status(200).json({message : "updated"})
     })
     .catch(function(e){
