@@ -24,15 +24,20 @@ router.post('/booking/user',function(req, res){
         userName: usrUsername
         })//params for pet data insertion into database
     
+        console.log(bookingdata)
         bookingdata.save().then(function(){
-        res.status(201).json({message:"Appointment created Successfully."})
+        res.status(201).json({
+            success : true,
+            message : "success"
+        })
+
+        
     })
     .catch(function(e){
         res.status(500).json({message:e})
     })
 
     //Read 
-
 })
 router.post('/booking/update/user', function(req,res){
     const petname=req.body.petname
@@ -53,4 +58,16 @@ router.post('/booking/update/user', function(req,res){
         res.status(500).json({message : e})
     })
 })
+//Read 
+router.post('/booking/username', function(req,res){
+    const uname = req.body.userName  
+    console.log(uname) 
+   booking.find({userName : uname}).then(function(data){
+       res.status(200).json({message:"data fetched", bookingData: data})
+   })
+   .catch(function(e){ 
+       res.status(500).json({ message : e})
+   })
+})
+
 module.exports=router

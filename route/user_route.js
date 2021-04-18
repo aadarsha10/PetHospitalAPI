@@ -87,12 +87,12 @@ router.delete('/deleteUser/:id',function(req,res){
     })
 })
 
-router.put('/updateUser/:id',function(req,res){
-    const uid=req.params.id;
-    const uName=req.body.userName
-    user.updateOne({_id:uid,userName:uName}).then(function(){
+router.put('/update',function(req,res){
+    const username=req.body.username
+    const email=req.body.email
+    user.updateOne({userName:username,email:email}).then(function(){
         console.log("updated")
-        res.status(200).json({message : "Updated!", status:"True"})
+        res.status(200).json({message : "updated", updateEmail : email})
     })
     .catch(function(e){
         res.status(500).json({message : e, status:"False"})
