@@ -70,4 +70,18 @@ router.post('/booking/username', function(req,res){
    })
 })
 
+router.delete('/booking/delete',function(req,res){
+    // const id=req.params._id.toString().trim() //params.id vnya url bata aauni,
+    // const reqId = req.body.item_id
+    // console.log(reqId)x
+    const id = mongoose.Types.ObjectID(req.body.user_id)
+    
+    console.log(id)
+    
+    pet.findByIdAndDelete({_id : id}, function(){
+    res.status(200).json({
+    message : "deleted",
+    })
+})
+})
 module.exports=router
