@@ -7,25 +7,22 @@ const jwt=require('jsonwebtoken')   //for token npm i jsonwebtoken --save
 
 const auth = require('../middleware/authenticate') //authenticate page routing 
 
-router.post('/register',[
-    check('username',"Username is required!").not().isEmpty(),  //empty checking
-    check('email',"Invalid Email Address!").isEmail(),     //email check
-    check('password',"Password is required!").not().isEmpty(),
-
-],function(req,res){
+router.post('/register', function(req,res){
     const errors=validationResult(req)
     
-
     if(errors.isEmpty()){        //if there is no error
     const firstName=req.body.fname
     const lastName=req.body.lname
     const userName=req.body.username 
     const email=req.body.email
     const password=req.body.password
+        console.log(firstName)
+        
 
     bcryptjs.hash(password,10,function(err,hash){   //hash varifies that a file/data hasnot altered.
-        const u1=new user({firstName:firstName,lastName:lastName,userName:userName,email:email,password:hash}) //first ko userName vnya database ko second ko chei mathi variable
+        const u1= new user({firstName:firstName,lastName:lastName,userName:userName,email:email,password:hash}) //first ko userName vnya database ko second ko chei mathi variable
         console.log(u1)
+        
         u1.save()
         .then(function(){ 
             res.status(201).json({success: true, message:"Registered!"})    //showing message in postman/client
@@ -89,6 +86,7 @@ router.delete('/deleteUser/:id',function(req,res){
 
 router.put('/update',function(req,res){
     const username=req.body.username
+    console.log(username)
     const email=req.body.email
     user.updateOne({userName:username,email:email}).then(function(){
         console.log("updated")

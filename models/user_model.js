@@ -13,7 +13,7 @@ const user=mongoose.model('User',{
     userName:{
         type:String,
         unique:true,
-        required:true,
+        required:true
         
     },
     email:{

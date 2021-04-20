@@ -22,8 +22,7 @@ const booking=mongoose.model('Booking',{
         required:true 
     },
     time:{
-        type:String,
-        required:true 
+        type:String
     },
     reason:{
         type:String
