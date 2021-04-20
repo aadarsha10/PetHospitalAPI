@@ -17,7 +17,7 @@ router.post('/register', function(req,res){
     const email=req.body.email
     const password=req.body.password
         console.log(firstName)
-        
+
 
     bcryptjs.hash(password,10,function(err,hash){   //hash varifies that a file/data hasnot altered.
         const u1= new user({firstName:firstName,lastName:lastName,userName:userName,email:email,password:hash}) //first ko userName vnya database ko second ko chei mathi variable
@@ -63,7 +63,6 @@ router.post('/login',function(req,res){
                 Email:userData.email,
                 Lastname:userData.lastName,
                 Firstname:userData.firstName
-
             })
             
 
@@ -88,6 +87,7 @@ router.put('/update',function(req,res){
     const username=req.body.username
     console.log(username)
     const email=req.body.email
+    console.log(email)
     user.updateOne({userName:username,email:email}).then(function(){
         console.log("updated")
         res.status(200).json({message : "updated", updateEmail : email})

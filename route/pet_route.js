@@ -82,6 +82,7 @@ router.post('/pets/user', function(req,res){
      console.log(uname) 
     pet.find({userName : uname}).then(function(data){
         res.status(200).json({message:"data fetched", petData: data})
+        console.log(data)
     })
     .catch(function(e){ 
         res.status(500).json({ message : e})
@@ -90,11 +91,11 @@ router.post('/pets/user', function(req,res){
 
 router.delete('/pet/delete',function(req,res){
     // const id=req.params._id.toString().trim() //params.id vnya url bata aauni,
-    // const reqId = req.body.item_id
-    // console.log(reqId)x
-    const id = mongoose.Types.ObjectID(req.body.item_id)
+    const reqId = req.body.item_id
+    console.log(reqId)
+    // const id = mongoose.Types.ObjectID(req.body.item_id)
     
-    console.log(id)
+    // console.log(id)
     
     pet.findByIdAndDelete({_id : id}, function(){
     res.status(200).json({

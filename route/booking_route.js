@@ -75,7 +75,7 @@ router.delete('/booking/delete',function(req,res){
     // const reqId = req.body.item_id
     // console.log(reqId)x
     const id = mongoose.Types.ObjectID(req.body.user_id)
-    
+        
     console.log(id)
     
     pet.findByIdAndDelete({_id : id}, function(){
